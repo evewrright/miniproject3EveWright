@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Posts{% endblock %}</h1>
+  <h1>{% block title %}Appointments{% endblock %}</h1>
   {% if g.user %}
     <a class="action" href="{{ url_for('blog.create') }}">New</a>
   {% endif %}
@@ -12,17 +12,19 @@
     <article class="post">
       <header>
         <div>
-          <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+          <div class="about">by {{ post['username'] }}</div>
         </div>
         {% if g.user['id'] == post['author_id'] %}
           <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
         {% endif %}
       </header>
-      <div class="text-end">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ post['id'] }}">
-          View Detail
-        </button>
+      <div class="details">
+        <div class="occurred-date">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
+        <div class="view-detail-btn">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ post['id'] }}">
+            View Detail
+          </button>
+        </div>
       </div>
       <div class="modal fade" id="exampleModal{{ post['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ post['id'] }}" aria-hidden="true">
         <div class="modal-dialog">
@@ -46,6 +48,3 @@
     {% endif %}
   {% endfor %}
 {% endblock %}
-
-
-
