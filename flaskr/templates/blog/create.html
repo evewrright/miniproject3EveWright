@@ -11,7 +11,12 @@
         <form method="post">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" name="title" id="title" value="{{ request.form['title'] }}" required>
+            <select class="form-control" name="title" id="title" required>
+              <option selected>Select Title</option>
+              <option value="1">Enrollment</option>
+              <option value="2">Drop/Withdraw from Class(es)</option>
+              <option value="3">Other</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="body">Body</label>

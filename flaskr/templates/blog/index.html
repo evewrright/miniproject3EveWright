@@ -20,6 +20,7 @@
       </header>
       <div class="details">
         <div class="occurred-date">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
+        <div class="centered-text">studentexample</div>
         <div class="view-detail-btn">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ post['id'] }}">
             View Detail
@@ -30,7 +31,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel{{ post['id'] }}">Appointment Summary</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel{{ post['id'] }}">{{ post['title'] }}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
