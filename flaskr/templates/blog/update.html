@@ -6,15 +6,28 @@
 
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-    <input type="submit" value="Save">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <select class="form-control" name="title" id="title" required>
+        <option value="">Select Title</option>
+        <option value="Title1" {% if request.form['title'] == 'Title1' %}selected{% elif post['title'] == 'Title1' %}selected{% endif %}>Title1</option>
+        <option value="Title2" {% if request.form['title'] == 'Title2' %}selected{% elif post['title'] == 'Title2' %}selected{% endif %}>Title2</option>
+        <option value="Title3" {% if request.form['title'] == 'Title3' %}selected{% elif post['title'] == 'Title3' %}selected{% endif %}>Title3</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="body">Body</label>
+      <textarea class="form-control" name="body" id="body" required>{{ request.form['body'] or post['body'] }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="occurred">Date of Occurrence</label>
+      <input type="date" class="form-control" name="occurred" id="occurred" value="{{ request.form['occurred'] or post['occurred'] }}" required>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save">
   </form>
   <hr>
   <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}
+
