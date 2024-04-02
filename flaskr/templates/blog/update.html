@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+  <h1>{% block title %}Edit "{{ post['topic'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
     <div class="form-group">
-      <label for="title">Title</label>
-      <select class="form-control" name="title" id="title" required>
-        <option value="">Select Title</option>
-        <option value="Title1" {% if request.form['title'] == 'Title1' %}selected{% elif post['title'] == 'Title1' %}selected{% endif %}>Title1</option>
-        <option value="Title2" {% if request.form['title'] == 'Title2' %}selected{% elif post['title'] == 'Title2' %}selected{% endif %}>Title2</option>
-        <option value="Title3" {% if request.form['title'] == 'Title3' %}selected{% elif post['title'] == 'Title3' %}selected{% endif %}>Title3</option>
+      <label for="topic">Topic</label>
+      <select class="form-control" name="topic" id="topic" required>
+        <option value="">Select Topic</option>
+        <option value="topic1" {% if request.form['topic'] == 'topic1' %}selected{% elif post['topic'] == 'topic1' %}selected{% endif %}>topic1</option>
+        <option value="topic2" {% if request.form['topic'] == 'topic2' %}selected{% elif post['topic'] == 'topic2' %}selected{% endif %}>topic2</option>
+        <option value="topic3" {% if request.form['topic'] == 'topic3' %}selected{% elif post['topic'] == 'topic3' %}selected{% endif %}>topic3</option>
       </select>
     </div>
     <div class="form-group">

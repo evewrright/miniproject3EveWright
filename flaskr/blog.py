@@ -13,7 +13,7 @@ bp = Blueprint('blog', __name__)
 def index():
     db = get_db()
     posts = db.execute(
-        'SELECT p.id, title, body, created, occurred, author_id, username'
+        'SELECT p.id, topic, body, created, occurred, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY occurred DESC'
     ).fetchall()
@@ -25,21 +25,21 @@ def index():
 def create():
     if request.method == 'POST':
         occurred = request.form['occurred']
-        title = request.form['title']
+        reason = request.form['topic']
         body = request.form['body']
         error = None
 
-        if not title:
-            error = 'Title is required.'
+        if not reason:
+            error = 'Topic is required.'
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO post (occurred, title, body, author_id)'
+                'INSERT INTO post (occurred, topic, body, author_id)'
                 ' VALUES (?, ?, ?, ?)',
-                (occurred, title, body, g.user['id'])
+                (occurred, topic, body, g.user['id'])
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -49,7 +49,7 @@ def create():
 
 def get_post(id, check_author=True):
     post = get_db().execute(
-        'SELECT p.id, title, body, created, occurred, author_id, username'
+        'SELECT p.id, topic, body, created, occurred, author_id, username'
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' WHERE p.id = ?',
         (id,)
@@ -71,21 +71,21 @@ def update(id):
 
     if request.method == 'POST':
         occurred = request.form['occurred']
-        title = request.form['title']
+        topic = request.form['topic']
         body = request.form['body']
         error = None
 
-        if not title:
-            error = 'Title is required.'
+        if not topic:
+            error = 'Topic is required.'
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET occurred = ?, title = ?, body = ?'
+                'UPDATE post SET occurred = ?, topic = ?, body = ?'
                 ' WHERE id = ?',
-                (occurred, title, body, id)
+                (occurred, topic, body, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
