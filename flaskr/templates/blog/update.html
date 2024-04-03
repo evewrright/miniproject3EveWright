@@ -10,9 +10,9 @@
       <label for="topic">Topic</label>
       <select class="form-control" name="topic" id="topic" required>
         <option value="">Select Topic</option>
-        <option value="topic1" {% if request.form['topic'] == 'topic1' %}selected{% elif post['topic'] == 'topic1' %}selected{% endif %}>topic1</option>
-        <option value="topic2" {% if request.form['topic'] == 'topic2' %}selected{% elif post['topic'] == 'topic2' %}selected{% endif %}>topic2</option>
-        <option value="topic3" {% if request.form['topic'] == 'topic3' %}selected{% elif post['topic'] == 'topic3' %}selected{% endif %}>topic3</option>
+        <option value="Enrollment" {% if request.form['topic'] == 'Enrollment' %}selected{% elif post['topic'] == 'Enrollment' %}selected{% endif %}>Enrollment</option>
+        <option value="Drop/Withdraw from Class(es)" {% if request.form['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% elif post['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% endif %}>Drop/Withdraw from Class(es)</option>
+        <option value="Other" {% if request.form['topic'] == 'Other' %}selected{% elif post['topic'] == 'Other' %}selected{% endif %}>Other</option>
       </select>
     </div>
     <div class="form-group">

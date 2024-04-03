@@ -13,9 +13,18 @@
             <label for="topic">Topic</label>
             <select class="form-control" name="topic" id="topic" required>
               <option selected>Select Topic</option>
-              <option value="1">Enrollment</option>
-              <option value="2">Drop/Withdraw from Class(es)</option>
-              <option value="3">Other</option>
+              <option value="Enrollment">Enrollment</option>
+              <option value="Drop/Withdraw from Class(es)">Drop/Withdraw from Class(es)</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="student">Select Student</label>
+            <select class="form-control" name="student" id="student" required>
+              <option selected>Select Student</option>
+              {% for student in students %}
+              <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+              {% endfor %}
             </select>
           </div>
           <div class="form-group">

@@ -20,7 +20,7 @@
       </header>
       <div class="details">
         <div class="occurred-date">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
-        <div class="centered-text">studentexample</div>
+        <div class="centered-text">{{ post['first_name'] }} {{ post['last_name'] }}</div>
         <div class="view-detail-btn">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ post['id'] }}">
             View Detail
