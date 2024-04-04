@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('apptLog', __name__)
 
 
 @bp.route('/')
@@ -19,7 +19,7 @@ def index():
         ' JOIN student s ON p.student_id = s.id'
         ' ORDER BY occurred DESC'
     ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    return render_template('apptLog/index.html', posts=posts)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -49,9 +49,9 @@ def create():
                 (occurred, topic, body, g.user['id'], student_id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('apptLog.index'))
 
-    return render_template('blog/create.html', students=students)
+    return render_template('apptLog/create.html', students=students)
 
 
 def get_post(id, check_author=True):
@@ -95,9 +95,9 @@ def update(id):
                 (occurred, topic, body, id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('apptLog.index'))
 
-    return render_template('blog/update.html', post=post)
+    return render_template('apptLog/update.html', post=post)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
@@ -107,4 +107,4 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('apptLog.index'))
