@@ -28,14 +28,52 @@
         </div>
       </div>
       <div class="modal fade" id="exampleModal{{ post['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ post['id'] }}" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel{{ post['id'] }}">{{ post['topic'] }}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              {{ post['body'] }}
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="row">
+                      <div class="col">
+                          <h1>Details</h1>
+                      </div>
+                    </div><hr>
+                    <div class="row">
+                      <div class="col">
+                          <h6>Advisor</h6>
+                          <div class="body">{{ post['username'] }}</div>
+                      </div>
+                    </div><hr>
+                    <div class="row">
+                      <div class="col">
+                          <h6>Student</h6>
+                          <div class="body">{{ post['first_name'] }} {{ post['last_name'] }}</div>
+                      </div>
+                    </div><hr>
+                    <div class="row">
+                      <div class="col">
+                          <h6>Date</h6>
+                          <div class="body">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="row">
+                      <div class="col">
+                          <h5>Appointment Notes</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">{{ post['body'] }}</div>
+                    </div>
+                  </div>
+              </div>
+            </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
