@@ -12,14 +12,14 @@ bp = Blueprint('apptLog', __name__)
 @bp.route('/')
 def index():
     db = get_db()
-    posts = db.execute(
-        'SELECT p.id, topic, body, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
-        ' FROM post p'
-        ' JOIN user u ON p.author_id = u.id'
-        ' JOIN student s ON p.student_id = s.id'
+    appointments = db.execute(
+        'SELECT a.id, topic, body, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
+        ' FROM appointment a'
+        ' JOIN user u ON a.author_id = u.id'
+        ' JOIN student s ON a.student_id = s.id'
         ' ORDER BY occurred DESC'
     ).fetchall()
-    return render_template('apptLog/index.html', posts=posts)
+    return render_template('apptLog/index.html', appointments=appointments)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -44,7 +44,7 @@ def create():
             flash(error)
         else:
             db.execute(
-                'INSERT INTO post (occurred, topic, body, author_id, student_id)'
+                'INSERT INTO appointment (occurred, topic, body, author_id, student_id)'
                 ' VALUES (?, ?, ?, ?, ?)',
                 (occurred, topic, body, g.user['id'], student_id)
             )
@@ -54,27 +54,27 @@ def create():
     return render_template('apptLog/create.html', students=students)
 
 
-def get_post(id, check_author=True):
-    post = get_db().execute(
-        'SELECT p.id, topic, body, created, occurred, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' WHERE p.id = ?',
+def get_appointment(id, check_author=True):
+    appointment = get_db().execute(
+        'SELECT a.id, topic, body, created, occurred, author_id, username'
+        ' FROM appointment a JOIN user u ON a.author_id = u.id'
+        ' WHERE a.id = ?',
         (id,)
     ).fetchone()
 
-    if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
+    if appointment is None:
+        abort(404, f"appointment id {id} doesn't exist.")
 
-    if check_author and post['author_id'] != g.user['id']:
+    if check_author and appointment['author_id'] != g.user['id']:
         abort(403)
 
-    return post
+    return appointment
 
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
-    post = get_post(id)
+    appointment = get_appointment(id)
 
     if request.method == 'POST':
         occurred = request.form['occurred']
@@ -90,21 +90,21 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET occurred = ?, topic = ?, body = ?'
+                'UPDATE appointment SET occurred = ?, topic = ?, body = ?'
                 ' WHERE id = ?',
                 (occurred, topic, body, id)
             )
             db.commit()
             return redirect(url_for('apptLog.index'))
 
-    return render_template('apptLog/update.html', post=post)
+    return render_template('apptLog/update.html', appointment=appointment)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    get_post(id)
+    get_appointment(id)
     db = get_db()
-    db.execute('DELETE FROM post WHERE id = ?', (id,))
+    db.execute('DELETE FROM appointment WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('apptLog.index'))

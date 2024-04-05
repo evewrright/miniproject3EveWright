@@ -8,30 +8,30 @@
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
+  {% for appointment in appointments %}
     <article class="post">
       <header>
         <div>
-          <div class="about">by {{ post['username'] }}</div>
+          <div class="about">by {{ appointment['username'] }}</div>
         </div>
-        {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('apptLog.update', id=post['id']) }}">Edit</a>
+        {% if g.user['id'] == appointment['author_id'] %}
+          <a class="action" href="{{ url_for('apptLog.update', id=appointment['id']) }}">Edit</a>
         {% endif %}
       </header>
       <div class="details">
-        <div class="occurred-date">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
-        <div class="centered-text">{{ post['first_name'] }} {{ post['last_name'] }}</div>
+        <div class="occurred-date">{{ appointment['occurred'].strftime('%Y-%m-%d') }}</div>
+        <div class="centered-text">{{ appointment['first_name'] }} {{ appointment['last_name'] }}</div>
         <div class="view-detail-btn">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ post['id'] }}">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ appointment['id'] }}">
             View Detail
           </button>
         </div>
       </div>
-      <div class="modal fade" id="exampleModal{{ post['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ post['id'] }}" aria-hidden="true">
+      <div class="modal fade" id="exampleModal{{ appointment['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ appointment['id'] }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel{{ post['id'] }}">{{ post['topic'] }}</h1>
+              <h1 class="modal-title fs-5" id="exampleModalLabel{{ appointment['id'] }}">{{ appointment['topic'] }}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -46,19 +46,19 @@
                     <div class="row">
                       <div class="col">
                           <h6>Advisor</h6>
-                          <div class="body">{{ post['username'] }}</div>
+                          <div class="body">{{ appointment['username'] }}</div>
                       </div>
                     </div><hr>
                     <div class="row">
                       <div class="col">
                           <h6>Student</h6>
-                          <div class="body">{{ post['first_name'] }} {{ post['last_name'] }}</div>
+                          <div class="body">{{ appointment['first_name'] }} {{ appointment['last_name'] }}</div>
                       </div>
                     </div><hr>
                     <div class="row">
                       <div class="col">
                           <h6>Date</h6>
-                          <div class="body">{{ post['occurred'].strftime('%Y-%m-%d') }}</div>
+                          <div class="body">{{ appointment['occurred'].strftime('%Y-%m-%d') }}</div>
                       </div>
                     </div>
                   </div>
@@ -69,7 +69,7 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col">{{ post['body'] }}</div>
+                      <div class="col">{{ appointment['body'] }}</div>
                     </div>
                   </div>
               </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit "{{ post['topic'] }}"{% endblock %}</h1>
+  <h1>{% block title %}Edit "{{ appointment['topic'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,23 +10,23 @@
       <label for="topic">Topic</label>
       <select class="form-control" name="topic" id="topic" required>
         <option value="">Select Topic</option>
-        <option value="Enrollment" {% if request.form['topic'] == 'Enrollment' %}selected{% elif post['topic'] == 'Enrollment' %}selected{% endif %}>Enrollment</option>
-        <option value="Drop/Withdraw from Class(es)" {% if request.form['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% elif post['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% endif %}>Drop/Withdraw from Class(es)</option>
-        <option value="Other" {% if request.form['topic'] == 'Other' %}selected{% elif post['topic'] == 'Other' %}selected{% endif %}>Other</option>
+        <option value="Enrollment" {% if request.form['topic'] == 'Enrollment' %}selected{% elif appointment['topic'] == 'Enrollment' %}selected{% endif %}>Enrollment</option>
+        <option value="Drop/Withdraw from Class(es)" {% if request.form['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% elif appointment['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% endif %}>Drop/Withdraw from Class(es)</option>
+        <option value="Other" {% if request.form['topic'] == 'Other' %}selected{% elif appointment['topic'] == 'Other' %}selected{% endif %}>Other</option>
       </select>
     </div>
     <div class="form-group">
       <label for="body">Body</label>
-      <textarea class="form-control" name="body" id="body" required>{{ request.form['body'] or post['body'] }}</textarea>
+      <textarea class="form-control" name="body" id="body" required>{{ request.form['body'] or appointment['body'] }}</textarea>
     </div>
     <div class="form-group">
       <label for="occurred">Date of Occurrence</label>
-      <input type="date" class="form-control" name="occurred" id="occurred" value="{{ request.form['occurred'] or post['occurred'] }}" required>
+      <input type="date" class="form-control" name="occurred" id="occurred" value="{{ request.form['occurred'] or appointment['occurred'] }}" required>
     </div>
     <input type="submit" class="btn btn-primary" value="Save">
   </form>
   <hr>
-  <form action="{{ url_for('apptLog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('apptLog.delete', id=appointment['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}
