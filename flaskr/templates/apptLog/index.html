@@ -9,7 +9,7 @@
 
 {% block content %}
   {% for appointment in appointments %}
-    <article class="post">
+    <article class="appointment">
       <header>
         <div>
           <div class="about">by {{ appointment['username'] }}</div>
@@ -22,16 +22,16 @@
         <div class="occurred-date">{{ appointment['occurred'].strftime('%Y-%m-%d') }}</div>
         <div class="centered-text">{{ appointment['first_name'] }} {{ appointment['last_name'] }}</div>
         <div class="view-detail-btn">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ appointment['id'] }}">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal{{ appointment['id'] }}">
             View Detail
           </button>
         </div>
       </div>
-      <div class="modal fade" id="exampleModal{{ appointment['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ appointment['id'] }}" aria-hidden="true">
+      <div class="modal fade" id="detailModal{{ appointment['id'] }}" tabindex="-1" aria-labelledby="detailModalLabel{{ appointment['id'] }}" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel{{ appointment['id'] }}">{{ appointment['topic'] }}</h1>
+              <h1 class="modal-title fs-5" id="detailModalLabel{{ appointment['id'] }}">{{ appointment['topic'] }}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

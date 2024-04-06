@@ -1,18 +1,33 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit "{{ appointment['topic'] }}"{% endblock %}</h1>
+  <h3>{% block title %}Edit Appointment Details{% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
   <form method="post">
     <div class="form-group">
+      <label for="username">Advisor</label>
+      <input class="form-control" type="text" value="{{ appointment['username'] }}" aria-label="readonly input" readonly>
+    </div>
+    <div class="form-group">
       <label for="topic">Topic</label>
       <select class="form-control" name="topic" id="topic" required>
         <option value="">Select Topic</option>
-        <option value="Enrollment" {% if request.form['topic'] == 'Enrollment' %}selected{% elif appointment['topic'] == 'Enrollment' %}selected{% endif %}>Enrollment</option>
-        <option value="Drop/Withdraw from Class(es)" {% if request.form['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% elif appointment['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% endif %}>Drop/Withdraw from Class(es)</option>
-        <option value="Other" {% if request.form['topic'] == 'Other' %}selected{% elif appointment['topic'] == 'Other' %}selected{% endif %}>Other</option>
+        <option value="Enrollment" {% if appointment['topic'] == 'Enrollment' %}selected{% endif %}>Enrollment</option>
+        <option value="Drop/Withdraw from Class(es)" {% if appointment['topic'] == 'Drop/Withdraw from Class(es)' %}selected{% endif %}>Drop/Withdraw from Class(es)</option>
+        <option value="Other" {% if appointment['topic'] == 'Other' %}selected{% endif %}>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="student">Student</label>
+      <select class="form-control" name="student" id="student" required>
+        <option selected>Select Student</option>
+        {% for student in students %}
+          <option value="{{ student.id }}" {% if student.id == appointment['student_id'] %} selected {% endif %}>
+            {{ student.first_name }} {{ student.last_name }} {{ student.id }}
+          </option>
+        {% endfor %}
       </select>
     </div>
     <div class="form-group">
