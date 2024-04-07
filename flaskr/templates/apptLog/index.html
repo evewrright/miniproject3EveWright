@@ -46,19 +46,19 @@
                     <div class="row">
                       <div class="col">
                           <h6>Advisor</h6>
-                          <div class="body">{{ appointment['username'] }}</div>
+                          <div class="body" style="margin-left: 0.75em;">{{ appointment['username'] }}</div>
                       </div>
                     </div><hr>
                     <div class="row">
                       <div class="col">
                           <h6>Student</h6>
-                          <div class="body">{{ appointment['first_name'] }} {{ appointment['last_name'] }}</div>
+                          <div class="body" style="margin-left: 0.75em;">{{ appointment['first_name'] }} {{ appointment['last_name'] }}<br>{{ appointment['student_id'] }}</div>
                       </div>
                     </div><hr>
                     <div class="row">
                       <div class="col">
                           <h6>Date</h6>
-                          <div class="body">{{ appointment['occurred'].strftime('%Y-%m-%d') }}</div>
+                          <div class="body" style="margin-left: 0.75em;">{{ appointment['occurred'].strftime('%Y-%m-%d') }}</div>
                       </div>
                     </div>
                   </div>
