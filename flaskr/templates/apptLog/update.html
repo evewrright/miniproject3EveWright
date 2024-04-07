@@ -31,8 +31,8 @@
         </datalist>
     </div>
     <div class="form-group">
-      <label for="body">Body</label>
-      <textarea class="form-control" name="body" id="body" required>{{ request.form['body'] or appointment['body'] }}</textarea>
+      <label for="note">Notes</label>
+      <textarea class="form-control" name="note" id="note" required>{{ request.form['note'] or appointment['note'] }}</textarea>
     </div>
     <div class="form-group">
       <label for="occurred">Date of Occurrence</label>

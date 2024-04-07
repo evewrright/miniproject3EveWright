@@ -30,7 +30,7 @@ bp = Blueprint('apptLog', __name__)
 def index():
     db = get_db()
     appointments = db.execute(
-        'SELECT a.id, topic, body, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
+        'SELECT a.id, topic, note, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
         ' FROM appointment a'
         ' JOIN user u ON a.author_id = u.id'
         ' JOIN student s ON a.student_id = s.id'
@@ -50,7 +50,7 @@ def create():
     if request.method == 'POST':
         occurred = request.form['occurred']
         topic = request.form['topic']
-        body = request.form['body']
+        note = request.form['note']
         student_id = request.form['student']
         error = None
 
@@ -61,9 +61,9 @@ def create():
             flash(error)
         else:
             db.execute(
-                'INSERT INTO appointment (occurred, topic, body, author_id, student_id)'
+                'INSERT INTO appointment (occurred, topic, note, author_id, student_id)'
                 ' VALUES (?, ?, ?, ?, ?)',
-                (occurred, topic, body, g.user['id'], student_id)
+                (occurred, topic, note, g.user['id'], student_id)
             )
             db.commit()
             return redirect(url_for('apptLog.index'))
@@ -73,7 +73,7 @@ def create():
 
 def get_appointment(id, check_author=True):
     appointment = get_db().execute(
-        'SELECT a.id, topic, body, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
+        'SELECT a.id, topic, note, created, occurred, author_id, student_id, s.first_name, s.last_name, username'
         ' FROM appointment a'
         ' JOIN user u ON a.author_id = u.id'
         ' JOIN student s ON a.student_id = s.id'
@@ -103,7 +103,7 @@ def update(id):
     if request.method == 'POST':
         occurred = request.form['occurred']
         topic = request.form['topic']
-        body = request.form['body']
+        note = request.form['note']
         student_id = request.form['student']
         error = None
 
@@ -114,9 +114,9 @@ def update(id):
             flash(error)
         else:
             db.execute(
-                'UPDATE appointment SET occurred = ?, topic = ?, body = ?, student_id = ?'
+                'UPDATE appointment SET occurred = ?, topic = ?, note = ?, student_id = ?'
                 ' WHERE id = ?',
-                (occurred, topic, body, student_id, id)
+                (occurred, topic, note, student_id, id)
             )
             db.commit()
             return redirect(url_for('apptLog.index'))

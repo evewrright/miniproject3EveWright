@@ -20,7 +20,7 @@ CREATE TABLE appointment (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   occurred DATE NOT NULL,
   topic TEXT NOT NULL,
-  body TEXT NOT NULL,
+  note TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id),
   FOREIGN KEY (student_id) REFERENCES student (id)
 );
