@@ -20,12 +20,12 @@
           </div>
           <div class="form-group">
             <label for="student">Student</label>
-            <select class="form-control" name="student" id="student" required>
-              <option selected>Select Student</option>
+            <input class="form-control" list="studentList" id="student" name="student" placeholder="Type to search...">
+              <datalist id="studentList">
               {% for student in students %}
-                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.id }}</option>
+                  <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }} {{ student.id }}</option>
               {% endfor %}
-            </select>
+              </datalist>
           </div>
           <div class="form-group">
             <label for="body">Body</label>
